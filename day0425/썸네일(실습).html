@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 700px;
+            height: 550px;
+            display: flex;
+            margin: auto;
+        }
+        #aside{
+            width: 120px;
+            height: 100%;
+            background-color: red;
+
+            /* 내부 컨텐츠의 가운데 수평 정렬 */
+            text-align: center;
+            overflow: scroll;
+        }
+        #content{
+            width: 580px;
+            height: 100%;
+            text-align: center;
+            background-color: blue;
+            
+        }
+        .a{
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            margin-left: 30px;
+            margin-top: 30px;
+            /* margin: auto; */                   
+        }
+
+        #aside img{
+            width: 100px; /*너비만 부여하면, html에서 해당너비에 대한 비율을 유지하여 높이를 알아서 설정 */
+            margin-top: 5px;
+        }
+        
+        #content img{
+            margin-top:150px;
+        }
+    </style>
+    <script>
+        // 이벤트핸들러 구현을 태그에 직접 작성하는 방법도 있지만,
+        // js의 프로그래밍적 방법으로 이벤트를 연결하는 방법도 있다
+
+        //익명함수(재사용이 없을 경우 이름없는 익명함수로 처리한다)
+        // function(){
+        //     alert("로드성공");
+        // }
+
+        //프로그램 실행시(동적으로) 이미지를 생성하여 aside의 자식요소로 부착하자
+        function createThumb(){
+            
+            for(let i=1;i<10;i++){
+                let aside=document.getElementById("aside");
+                let img=document.createElement("img");
+                
+                img.src="../images/geographic/animal"+i+".jpg";
+                aside.appendChild(img);
+                
+                img.addEventListener('click',(e)=>{
+                    let content=document.getElementById("content");
+                    let img2=document.querySelector("#content img")
+                    // img2.src="../images/geographic/animal"+i+".jpg";
+                    
+                    img2.src=e.target.src;
+                });
+            };
+            
+        }
+
+
+        //window 생략 
+        addEventListener("load",function(){
+            createThumb();//썸네일 생성하기
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="aside"></div>
+        <div id="content">
+            <img src="" alt="">
+        </div>
+    </div>
+</body>
+</html>

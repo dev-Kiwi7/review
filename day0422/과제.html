@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #whole{
+            display: flex;
+            /* flex-direction: column; */
+        }
+        #wrapper{
+            height: 450px;
+            width: 1000px;
+        }
+        .a{
+            background-color: aqua;
+            height: 50px;
+            width: 100%;
+            clear: both;
+        }
+        #b{
+            display: flex;
+            flex-direction: row;
+        }
+
+        #b1{
+            background-color: aquamarine;
+            height: 300px;
+            width: 500px;
+        }
+        #b2{
+            background-color: blue;
+            width: 500px;
+            height: 300px;
+        }
+
+        #wrapper2{
+            height: 700px;
+            width: 1000px;
+        }
+        #b3{
+            background-color: greenyellow;
+            clear: both;
+        }
+
+
+
+        
+        #b1b{
+            background-color: aquamarine;
+            height: 300px;
+            width: 500px;
+        }
+        #b2b{
+            background-color: blue;
+            width: 500px;
+            height: 300px;
+        }
+        #x{
+            display: flex;
+        }
+
+        #b3b{
+            background-color: greenyellow;
+            width: 500px;
+           
+          
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="whole">
+        <div id="wrapper">
+            <div class="a">1번</div>
+            <div class="a">2번</div>
+            <div id="b">
+                <div id="b1">3</div>
+                <div id="b2">4</div>
+            </div>
+            <div class="a">5</div>
+        </div>
+        <div id="wrapper2">
+            <div class="a">1번</div>
+            <div id="x">
+                <div>
+                    <div id="b1b">3</div>
+                    <div id="b2b">4</div>
+                </div>
+                <div id="b3b">4</div>
+            </div>
+            <div class="a">5</div>
+        </div>
+    </div>
+</body>
+</html>

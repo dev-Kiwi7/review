@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* a태그를 버튼처럼 보이게 만들기 */
+        a{
+            background-color: red;
+            border-radius: 10px;
+            display:inline-block;
+            /* 인라인속성은 유지하되 다른 태그 요소와 공존이 가능하면서 너비 높이 마진... */
+            height: 70px;
+            width: 120px;
+            line-height: 70px;
+            text-align: center;
+            text-decoration: none;
+        }
+        a:hover{
+            background-color: orange;
+        }
+        img{
+            width: 220px;
+            height: 220px;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:next()" >다음 카드</a>
+    <div>
+        <img id="card" src="../images/card/h1.jpg" alt="" >
+    </div>
+</body>
+
+<script>
+    let imgs=document.querySelector("#card");
+    let count =1
+    function next(){
+        count++;
+        let result;
+        if(count%3==0){
+            result="../images/card/joker.jpg"
+        }else{
+            result="../images/card/h"+count+".jpg"
+        }
+        imgs.src=result
+    }
+
+</script>
+</html>

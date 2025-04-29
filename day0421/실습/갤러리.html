@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width:600px;
+            height:600px;
+            background-color: yellow;
+            margin: auto;
+        }
+        #header{
+            background-color: red;
+            height:50px;
+            text-align: center;
+            line-height: 50px;
+        }
+        
+        #header button:nth-child(1) {
+            background-color: palegreen;
+        }
+        #header button:nth-child(2) {
+            background-color: gray;
+        }
+        #section{
+        
+            height:550px;
+            background-color: pink;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <button id="btn1" onclick="prev()">◀</button>
+            <button id="btn2" >▶</button>
+        </div>
+        <div id="section">
+            <img src="../../images/geographic/animal1.jpg" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    count =1;
+    let img= document.querySelector("img")
+
+    function next(){
+        count++;
+        img.src="../../images/geographic/animal"+count+".jpg" 
+    }
+    function prev(){
+        count--;
+        img.src="../../images/geographic/animal"+count+".jpg" 
+    }
+    document.getElementById("btn2").addEventListener('click',()=>{
+        count++;
+        img.src="../../images/geographic/animal"+count+".jpg" 
+
+    })
+</script>
+</html>

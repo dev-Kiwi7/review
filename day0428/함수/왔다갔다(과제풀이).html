@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #stage{
+            width: 700px;
+            height: 400px;
+            background-color: yellow;
+            position: relative;
+        }
+    </style>
+    <script>
+        //자바스크립트 언어는 2가지 플랫폼으로 개발할 수 있다
+        //1)브라우저 기반 js(window)
+        //2)Node.js기반 js(global)
+        let rect;
+        let x=0;
+        let flag=true //방향을 결정하는 함수
+        let autoflag=false //자동 호출을 결정하는 
+
+        function createRect(){
+            rect=document.createElement("div");
+            rect.style.width="30px";
+            rect.style.height="30px";
+            rect.style.backgroundColor="red";
+            rect.style.borderRadius="50%";
+            rect.style.position="absolute";
+            rect.style.left=0+"px";
+            rect.style.top=100+"px";
+
+            //stage에 부착
+            let stage=document.getElementById("stage");
+            stage.appendChild(rect);
+        }
+        
+        function move(){
+            //문서내의 rect라는 요소에 적용된 css중 left값을 증가시키다가 일정시점에 도달하면 방향 바꾸자
+            rect.style.left=x+"px";
+            if(flag){
+                x+=5;
+            }else{
+
+                x-=5
+            }
+            //우측 경계벽을 만나거나 또는 좌측 시작 벽을 만나면 방향을 뒤집혀야 한다
+            if(x>=700 || x<=0){
+                flag=!flag;
+            }
+        }   
+        
+
+        //자동처리 함수
+        function auto(){
+            //자동이란 이미 작성된 수동 코드를 컴퓨터에게 맡기는 행위
+            if(autoflag){
+                move();
+            }    
+            // setTimeout("auto()",1000);
+
+        }
+        window.addEventListener('load',function(){
+            //물체 만들기
+            createRect();
+
+            //각 버튼들에 이벤트 연결하기 
+            document.querySelector("button:nth-child(1)").addEventListener("click", move);
+            document.querySelector("button:nth-child(2)").addEventListener("click",function(){
+                autoflag=true;
+            });
+            document.querySelector("button:nth-child(3)").addEventListener("click",function(){
+                autoflag=false;
+            });
+
+            //멈추지 않는 루프를 하나 실행시키자, setTimeout()은 지정된 시간이 흐르고 나서 함수를 호출한 다음에 자동소멸하지만
+            //setInterval()은 지정된 시간 간격으로 끝없이 지정된 함수를 호출하는 루프 
+            setInterval("auto()",10);
+        });
+    </script>
+</head>
+<body>
+    <button>manual</button>
+    <button>auto</button>
+    <button>pause</button>
+    <div id="stage"></div>
+    
+</body>
+</html>

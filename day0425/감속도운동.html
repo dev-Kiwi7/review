@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let div;
+        let a=0.1; //비율계수 (기울기) 기울기가 높을수록 투박함
+        let targetX=800; //도달한 목표 지점 
+        function move(){
+            //나의 위치 = 기존 나의 위치+a*(목표지점 -나의 위치)
+            div.style.left=parseInt(div.style.left)+ a*(targetX-parseInt(div.style.left))+"px";
+            setTimeout(move,10)
+
+        }
+
+
+
+
+
+
+        function createRect(){
+            div=document.createElement("div");
+            div.style.background="red";
+            div.style.width=50+"px";
+            div.style.height=50+"px";
+            div.style.position="absolute";
+            div.style.left=0+"px";
+            div.style.top=100+"px";
+
+
+             
+            document.body.appendChild(div);
+        }
+        //프로그램 가동과 동시에 물체 생성/온로드 시점에
+        addEventListener("load",function(){
+            createRect();//물체 생성 함수 호출
+            move();
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

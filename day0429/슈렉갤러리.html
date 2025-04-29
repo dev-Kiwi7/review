@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/common.js"></script>
+    <style>
+        #wrapper{
+            width: 500px;
+            margin: auto;
+        }
+        #mask{
+            width: 500px;
+            height: 333px;
+            background-color: yellow;
+            position: relative;  
+            /* static+left+top =>relatice */
+            border: 2px solid red;
+            overflow: hidden;
+        }
+        #footer{
+            display: flex;
+            /* justify-content: space-between; */
+            text-align: center;
+            background-color: aquamarine;
+            width: 100%;
+            height:  50px;
+            border-left: 2px solid red;
+            border-right: 2px solid red;
+            border-bottom: 2px solid red;
+            align-items: center;
+            position: relative;
+           
+        }
+       
+
+        #footer>div{
+            width:30px;
+            height:30px;
+            background-color: yellow;
+            border:1px solid black;
+            border-radius:50%;
+
+            position: absolute;
+            left: 0px;
+              
+    
+        }
+        #footer>div:hover{
+            background-color: blueviolet;
+            cursor: pointer;
+        }
+    </style>
+
+    <script>
+        let imgArray=[
+            "img0.jpg",
+            "img1.jpg",
+            "img2.jpg",
+            "img3.jpg",
+            "img4.jpg",
+            "img5.jpg",
+            "img6.jpg"
+        ];
+        let box;
+        let img;
+        let flag=false;
+        let a=0.1;
+        let targetIndex;
+        // let i;s
+
+        function gameLoop(){
+            // let n=getRandom(6);
+            // if(flag){
+            //     move(n);
+            // }
+            let targetX = targetIndex * -500;
+            box.style.left=parseFloat(box.style.left)+a*(targetX-parseFloat(box.style.left))+"px";
+        }
+
+        //슈렉의 이미지 7개를 생성하고 7개 이미지를 담게된 바깥쪽 부모인 box를 생성하여 mask의 자식요소로 부착하자
+        function createImg(){
+            box=document.createElement("div");
+            let mask=document.getElementById("mask");
+
+            box.style.backgroundColor="green";
+            box.style.width=500*imgArray.length+"px";
+            box.style.height=340+"px";
+            box.style.position="absolute";
+            box.style.left="0px";
+
+            //box안에 이미지의 배열 수만큼의 슈렉을 생성하여 자식으로 부착하자
+            for(let i=0;i<imgArray.length;i++){
+                img=document.createElement("img");
+                img.src="../images/shurek/"+imgArray[i];
+                img.style.position="absolute";
+                img.style.left=(i*500)+"px";
+                box.appendChild(img);
+            }
+            mask.appendChild(box);
+        }
+
+        //사용자가 선택한 번째의 슈렉이미지 box의 값을 위치시키기
+        function move(i){
+            // box.style.left=parseFloat(box.style.left)+a*((i*-500)-parseFloat(box.style.left))+"px";
+            targetIndex=i;
+        }
+
+        //일반인들 콘솔 제어가 불가능하므로 UI이미지를 제어
+        function createControl(){
+            let footer=document.getElementById("footer");
+            let fleft=0;
+            for (let i=0;i<imgArray.length;i++){
+
+                let dot=document.createElement("div");
+                dot.innerHTML=i+1;
+                dot.style.left=fleft+"px";
+                footer.appendChild(dot);
+                fleft+=50;
+
+                dot.addEventListener('mouseover',()=>{
+                    move(i);
+
+                })
+            }
+
+        }
+
+        addEventListener('load',()=>{
+            createImg(); //슈렉의 이미지
+            createControl(); //이미지 컨트롤러 생성
+
+            document.querySelector("button").addEventListener('click',()=>{
+                flag=!flag;
+            })
+
+            setInterval(gameLoop,60);
+            // setInterval(function(){move(i)},100);
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="mask"></div>
+        <div id="footer"></div>
+        <button>자동</button>
+
+    </div>
+</body>
+</html>

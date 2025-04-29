@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../lib/common.js"></script>
+    <script>
+        addEventListener("load",()=>{
+    
+            let lunch=new Array(10);
+            lunch[0]="라면";
+            lunch[1]="떡볶이";
+            lunch[2]="짜장면";
+            lunch[3]="국수";
+            lunch[4]="햄버거";
+            lunch[5]="치킨";
+            lunch[6]="피자";
+            lunch[7]="마라샹궈";
+            lunch[8]="김밥";
+            lunch[9]="된장찌개";
+        
+            let div=document.querySelector("div");
+            div.innerHTML=`${lunch[getRandom(lunch.length-1)]}`;
+        })
+    </script>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

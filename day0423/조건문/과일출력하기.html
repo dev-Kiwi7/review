@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <script>
+        function showInput(){
+            let n=prompt("과일을 선택하세요\n1.사과 2.바나나 3.블루베리");
+        
+    
+            let img=document.querySelector("img");
+        
+            console.log(img)
+            // if(n==1){
+            //     img.src="../images/fruit/3316506_apple_apples_fruit_maca_icon.png"
+            // }else if(n==2){
+            //     img.src="../images/fruit/7603402_peach_healthy_organic_food_fruit icon_icon.png"
+            // }else if(n==3){
+            //     img.src="../images/fruit/7603407_blueberry_healthy_organic_food_fruit icon_icon.png"
+            // }else if(n==4){
+            //     img.src="../images/fruit/7603409_cherry_healthy_organic_food_fruit icon_icon.png"
+            // }else if(n==5){
+            //     img.src="../images/fruit/7603407_blueberry_healthy_organic_food_fruit icon_icon.png"
+            // }
+            
+            
+        
+        
+        
+            switch(n){
+                case "1":img.src="../images/fruit/3316506_apple_apples_fruit_maca_icon.png";break;
+                case "2":img.src="../images/fruit/7603402_peach_healthy_organic_food_fruit icon_icon.png";break;
+                case "3":img.src="../images/fruit/7603409_cherry_healthy_organic_food_fruit icon_icon.png";break;
+                case "4":img.src="../images/fruit/7603407_blueberry_healthy_organic_food_fruit icon_icon.png";break;
+                case "5":img.src="../images/fruit/7603410_banana_healthy_organic_food_fruit icon_icon.png";break;
+            }
+        }
+
+    </script>
+<body>
+    <button onclick="showInput()">프롬포트 띄우기</button>
+
+    <img src="../images/fruit/7603410_banana_healthy_organic_food_fruit icon_icon.png" alt="">
+
+</body>
+</html>

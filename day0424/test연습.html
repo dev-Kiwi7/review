@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body onload="init()">
+    <div id="stage"></div>
+</body>
+<script>
+    let bgx=0
+    let stage=document.getElementById("stage");
+    console.log(stage);
+    stage.style.backgroundImage="url(../images/gallerxy/bg.png)";
+    stage.style.width="1000px";
+    stage.style.height="700px";
+    stage.style.position="relative";
+    
+    function moving(){
+        bgx+=10;
+        stage.style.backgroundPosition=`0px ${bgx}px`;
+    }
+
+    function bug(){
+        let top=100;
+        let left=100;
+        for(let i=1;i<11;i++){
+            let img=document.createElement("img");
+            img.src="../images/gallerxy/enermy2.png";
+            stage.appendChild(img);
+            console.log(img);
+            img.style.position="absolute";
+            img.style.left=`${left}px`;
+            img.style.top=`${top}px`;
+            left+=50;
+        }
+    }
+
+    function init(){
+        bug();
+        setInterval(moving,20);
+    }
+</script>
+</html>

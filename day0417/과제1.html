@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    
+</head>
+<body>
+    <table width="500px" border="1px" align="center">
+        <tr>
+            <td colspan="2" align="center">회원가입</td>
+        </tr>
+        <tr>
+            <td>ID</td>
+            <td><input placeholder="아이디를 입력하세요"></td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td><input type="password" placeholder="비밀번호를 입력하세요" maxlength="8"></td>  
+        </tr>
+        <tr>
+            <td>name</td>
+            <td><input type="text" placeholder="이름을 입력하세요" maxlength="8"></td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>
+                <input type="text" placeholder="이메일을 입력하세요" maxlength="8">
+                @
+                <select name="" id="">
+                    <option value="naver">naver</option>
+                    <option value="">daum</option>
+                    <option value="">google</option>
+                </select>
+            </td>
+          
+        </tr>
+        <tr>
+            <td>수신여부</td>
+            <td>
+                <input type="radio" name="receive">예
+                <input type="radio" name="receive">아니오
+            </td>
+        </tr>
+        <tr>
+            <td>보유기술</td>
+            <td>
+                <input type="checkbox">java
+                <input type="checkbox">mysql
+                <input type="checkbox">spring
+                <input type="checkbox">linux
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button>가입</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+        }
+        #wrapper{
+            display: flex;
+            width: 850px;
+            height: 550px;
+        }
+        
+        #aside{
+            width: 150px;
+            height: 100%;
+            background-color: burlywood;
+            overflow: scroll;
+        }
+        #content{
+            width: 700px;
+            height: 100%;
+            background-color: aquamarine;
+            display: flex;
+            align-items: center;
+            position:relative;
+        }
+        #content img{
+            width: 150px;
+            height: 150px;
+            margin-left: 400px;
+            
+        }
+    </style>
+    <script>
+        //프로그램에서 자주 사용될 가능성이 있는 요소들을 초기화 작업 시, 전역변수화 시켜놓자
+        let content=document.getElementById("content");
+        let aside;
+        let cakeImg;
+        let flag=false;
+        
+        function createFood(){
+            cakeImg=document.createElement("img");
+            cakeImg.src="../images/food/98542_cake_icon.png";
+            cakeImg.style.position="absolute";
+             
+            //음식이 따라다니고 안 따라다니고의 기준은 flag변수이므로 유저를 배려하여 클릭시마다 논리값을 뒤집어 버리자
+            cakeImg.addEventListener('click',()=>{
+                flag=!flag;
+                if(flag){
+                    cakeImg.style.border="3px solid orange"
+                    cakeImg.style.borderRadius="50%"
+                }else{
+                    
+                    cakeImg.style.border=""
+                }
+            });
+
+
+
+
+
+            content.appendChild(cakeImg)
+            
+        }
+        function createDish(){
+            // let dishImg=document.createElement("img");
+            // dishImg.src="../images/food/2693197_dish_kitchen_icon.png"
+            // dishImg.style.position="absolute";
+            
+            // content.appendChild(dishImg)
+            let div=document.createElement("div");
+            div.style.backgroundColor="yellow";
+            div.style.borderRadius="50%"
+            div.style.border="1px solid black"
+            div.style.width="300px";
+            div.style.height="300px";
+            content.appendChild(div);
+            
+        }
+        
+        function init(){
+            content=document.getElementById("content");
+            aside=document.getElementById("aside");
+
+            createFood(); //음식 등장시키자
+            createDish(); 
+            
+            //문서 전체를 대상으로 마우스 이벤트를 연결하자
+            document.body.addEventListener("mousemove",function(event){
+                // console.log("지금 움직임?");
+
+                //마우스에 의한 x,y좌표를 음식의 좌표와 일치시키면 따라다니는 효과가능
+                let x=event.clientX;
+                let y=event.clientY;
+                
+                //아래 조건식은 flag에 따라 수행될지 말지가 결정된다
+                if(flag){
+                    //들고 다니는 와중에 유효한 범위라면
+                    if(x<(750-110)&&y<(550-80)){
+
+                        cakeImg.style.left=(x-470)+"px";
+                        cakeImg.style.top=(y-65)+"px";
+                        
+                        // aside.innerHTML+=`${x} ${y}<br>`;
+                    }
+                    
+                   
+                }
+            })
+
+        }
+
+        addEventListener("load",function(){
+            init();
+        });
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="content"></div>
+        <div id="aside"></div>
+    </div>
+</body>
+</html>

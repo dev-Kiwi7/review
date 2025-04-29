@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="next()">다음컷</button>
+    <img src="../../images/hero/image1.png" alt="">
+</body>
+<script>
+    //버튼을 누를때마다 현재 보고있는 이미지의 이름끝자리 숫자를 증가시켜보자
+    let count=1;
+    function next(){
+        //html문서내의 이미지가 보유한scr 속성의 값을 내가 원하는 경로로 교체
+        count++
+        console.log(count)
+        document.querySelector("img").src="../../images/hero/image"+count+".png"
+    }
+</script>
+</html>

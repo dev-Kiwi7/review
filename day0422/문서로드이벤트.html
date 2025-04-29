@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function init(){
+            let box=document.getElementById('box');
+            box.innerText="name";
+        }
+    </script>
+</head>
+<body onLoad="init()">
+    <div id="box"></div>
+
+    <button ondblclick="alert()" onMouseOver="alert('올렸어')" onMouseOut="alert('내려놓았어')">저를 클릭하시오</button>
+<!-- 실제 서버에 전송할 데이터는 value 속성에 넣어야함 -->
+    <select onchange="alert('너 다른 걸로 바꿨지')">
+        <option value="google.com">google</option>
+        <option value="naver.com">naver</option>
+        <option value="daum.net">daum</option>
+    </select>
+    
+    <!-- onchange이벤트 핸들러는 기존의 값이 바뀌는 상황을 잡아내는 이벤트 핸들러이기 때문에 꼭  -->
+    <input type="text" onchange="alert('focus')">
+</body>
+</html>

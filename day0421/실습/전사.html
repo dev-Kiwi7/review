@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 900px;
+            height: 800px;
+            display: flex;
+           
+
+            /* text-align: center; */
+            line-height: 40px;
+        }
+        #aside{
+            width: 200px;
+            height: 800px;
+            background-color: aqua;
+            line-height: 40px;
+            /* float: left; */
+            /* text-align: right; */
+        }
+        #content{
+            /* float: right; */
+            background-color: bisque;
+            width: 700px;
+            height: 800px;
+            text-align: center;
+        }
+        #pic{
+            width: 300px;
+            height: 350px;
+            opacity: 0.5;
+        }
+        
+        
+        img{
+            width: 40px;
+            height: 40px;
+        }
+        .setting{
+            display: flex;
+            justify-content: space-between;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="aside">
+            <div class="setting">
+                너비 조절
+                <div>
+                    <img src="../../images/plus_btn.png" alt="" onclick="setWidth()">
+                    <img src="../../images/minus_btn.png" alt="" onclick="set_Width()">
+                </div>
+            </div>
+            <div class="setting">
+                높이 조절
+                <div>
+                    <img src="../../images/plus_btn.png" alt="" onclick="setheight()"> 
+                    <img src="../../images/minus_btn.png" alt="" onclick="set_height()">
+                </div>
+            </div>
+            <div class="setting">
+                투명도 조절
+                <div>
+                    <img src="../../images/plus_btn.png" alt="" onclick="setOpacity()">
+                    <img src="../../images/minus_btn.png" alt="" onclick="set_Opacity()">
+                </div>
+            </div>
+            <div class="setting">
+                각도 조절
+                <div>
+                    <img src="../../images/plus_btn.png" alt="" onclick="setRotate()">
+                    <img src="../../images/minus_btn.png" alt="" onclick="set_Rotate()">
+                </div>
+            </div>
+           
+        </div>
+        <div id="content">
+            <img id="pic" src="../../images/warior.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    let img=document.querySelector("img")
+    let width=300
+    let height=350
+    let opacity=0.5
+    let rotate=10
+    function setWidth(){
+        width+=30
+        document.querySelector("#pic").style.width=width+"px"
+    }
+   
+    function setheight(){
+        height+=30
+        document.querySelector("#pic").style.height=height+"px"
+    }
+    function setOpacity(){
+        opacity+=0.1
+        document.querySelector("#pic").style.opacity=opacity
+    }
+    function setRotate(){
+        rotate+=10
+        document.querySelector("#pic").style.transform="rotate("+rotate+"deg)"
+    }
+
+    function set_Width(){
+        width-=30
+        document.querySelector("#pic").style.width=width+"px"
+    }
+   
+    function set_height(){
+        height-=30
+        document.querySelector("#pic").style.height=height+"px"
+    }
+    function set_Opacity(){
+        opacity-=0.1
+        document.querySelector("#pic").style.opacity=opacity
+    }
+    function set_Rotate(){
+        rotate-=10
+        document.querySelector("#pic").style.transform="rotate("+rotate+"deg)"
+    }
+
+   
+</script>
+</html>

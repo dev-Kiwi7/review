@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #stage{
+            width: 1000px;
+            height: 800px;
+            margin: auto;
+            background-image: url(../images/gallerxy/bg.png);
+            position: relative;
+         
+        }
+    </style>
+    <script>
+        //stage에 적용된 css의 중 background-position의 y값을 증가
+        let bgY=0;
+        function bgEffect(){
+            let stage=document.getElementById("stage");
+            bgY+=2;
+            stage.style.backgroundPosition=`0px ${bgY}px`;
+            
+        }
+        function createEnemy(){
+            let left=100;
+            let top=100;
+            for(let x=0;x<5;x++){
+                for(let i=0;i<20;i++){
+                    
+                    let stage=document.getElementById("stage");
+                    let img=document.createElement("img");
+                    img.src="../images/gallerxy/enermy2.png"
+                    stage.appendChild(img)
+                    img.style.position="absolute"; //stage안에 살게 함
+                    img.style.top=`${top}px`;
+                    img.style.left=`${i*30+left}px`;
+                    
+                }
+                top+=100;
+            }
+        }
+        function init(){
+            createEnemy();
+  
+
+
+            //개발자 대신 자동으로 지정된 함수를 시간 간격으로 호출
+            setInterval("bgEffect()",10);
+        }
+    </script>
+</head>
+<body onload="init()">
+    <div id="stage"></div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            border-radius: 10px;
+        }
+        #wrapper{
+            width: 500px;
+            margin: auto;
+        }
+        #content{
+            width: 100%;
+            height: 300px;
+            background-color: aqua;
+            text-align: center;
+            font-size: 100px;
+            line-height: 300px;
+        }
+        #input_area{
+            width: 100%;
+            height: 250px;
+            background-color: green;
+            text-align: center;
+        }
+        #input_area input{
+            width: 97%;
+            height: 97%;
+            /* background-color: green; */
+            border-radius: 10px;
+            border: 0px;
+            font-size: 80px;
+
+        }
+        #feedback{
+            width: 100%;
+            height: 100px;
+            background-color: pink;
+            text-align: center;
+            color: red;
+            font-size: 75px;
+        }
+        #score{
+            width: 100%;
+            height: 50px;
+            background-color:wheat;
+            font-size: 40px;
+            text-align: center;
+            line-height: 50px;
+        }
+
+    </style>
+    <script>
+        let i=0;
+        let wordArray=[
+            "넥타이",
+            "여름",
+            "태풍",
+            "광화문",
+            "애플",
+            "마카롱",
+            "노트북",
+            "신세계",
+            "우주정거장",
+            "구름"
+        ];
+        let content;
+        let input;
+        let feedback;
+        let score;
+        let num=0; //점수를 누적시킬 전역변수
+
+        //점수 계산 및 출력
+        function printScore(){
+            score.innerText=num;
+        }
+
+        //게임에 사용할 단어를 출력하는 함수
+        function printWord(){
+            content.innerText=wordArray[i];
+        }
+
+        function next(){
+            i++;
+            printWord();
+            if(i>=wordArray.length){
+                content.innerText="게임종료"
+                input.disabled=true;
+            }
+        }
+
+        //초기화 함수
+        function init(){
+            content=document.getElementById("content");
+            input=document.querySelector("#input_area input")
+            feedback=document.getElementById("feedback");
+            score=document.getElementById("score");
+
+            //텍스트 박스에 키보드 이벤트 연결
+            input.addEventListener("keyup",(e)=>{
+                if(e.keyCode==13){
+                    //입력한 단어가 일치할 때만 아래의 코드가 수행
+                    // console.log(input.value)
+                    if(content.innerText==input.value){
+                        next();
+                        feedback.innerText="Good";
+                        num+=10;
+                        printScore();
+                    }else{
+                        feedback.innerText="again";
+                    }
+                    input.value=""
+                 
+                
+                }
+            })
+            printWord();
+            printScore();
+        }
+
+        addEventListener("load",function(){
+            init();
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="content"></div>
+        <div id="input_area">
+            <input type="text">
+        </div>
+        <div id="feedback"></div>
+        <div id="score"></div>
+    </div>
+</body>
+</html>

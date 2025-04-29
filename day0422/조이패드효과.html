@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            display: flex;
+            width: 900px;
+            height: 600px;
+        }
+        #aside{
+            width: 200px;
+            background-color: antiquewhite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          
+        }
+        #section{
+            width: 700px;
+            background-color: yellowgreen;
+            position: relative;
+            background-image: url(../images/play/bg.jpg);
+        }
+
+        .a{
+            border: 0px black;
+        }
+
+        button{
+            width: 50px;
+            height: 50px;
+            border-radius: 10%;
+    
+        }
+
+        #hero{
+            width: 40px;
+            position: absolute;
+            left: 200px;
+            top: 100px;
+        }
+       
+        
+        
+        
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="aside">
+            <div>
+                <button id="up" onclick=moveUp() >▲</button>
+            </div>
+            <div>
+                <button onclick=moveLeft()>◀</button>
+                <button onclick=moveDown()>▼ </button>
+                <button onclick=moveRight() >▶</button>
+            </div>
+        </div>
+        <div id="section">
+            <img id="hero" src="../images/play/plane.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    let hero=document.querySelector("#hero");
+    let x=200
+    let y=100
+
+    //문서 내의 hero 요소에 적용된 css 중 position 값 중 left 증가 
+    function moveRight(){
+        x+=100;
+        hero.style.left=x+"px";
+        console.log(x)
+    }
+    function moveUp(){
+        y-=10;
+        hero.style.top=y+"px";
+    }
+    function moveLeft(){
+        x-=10;
+        hero.style.left=x+"px";
+        console.log(x)
+    }
+    function moveDown(){
+        y+=10;
+        hero.style.top=y+"px";
+    }
+   
+</script>
+</html>

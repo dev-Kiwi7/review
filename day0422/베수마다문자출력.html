@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #num{
+            font-size: 200px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <button>카운터 증가</button>
+
+    <div id="num">0</div>
+</body>
+<script>
+    let a=document.querySelector("button"); 
+    let num=document.querySelector("#num"); 
+    let count=0;
+    a.addEventListener('click',()=>{
+        count++;
+        let fruit=(count%5==0)?"apple":count;
+        num.innerHTML=fruit
+        console.log(num)
+    })
+</script>
+</html>

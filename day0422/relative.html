@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box1,#box2{
+            background-color: rebeccapurple;
+            width: 100px;
+            height: 100px;
+        }
+        #box2{
+            background-color: red;
+            position: relative;
+            /* 상대위치는 다른 요소에 의해 밀려나거나 영향을 받은 현재 자신의 위치를 기준으로 한 위치 속성 */
+            top:50px
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div id="box1">박스1</div>
+        <div id="box2">박스2</div>
+    </div>
+  
+</body>
+</html>

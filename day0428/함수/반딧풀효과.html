@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        #wrapper{
+            height: 900px;
+            background-image: url("../../images/bandi/night.jpg");
+            background-size: 100% 100%;
+            position: relative;
+        }
+    </style>
+    <script src="../../lib/common.js"></script>
+    <script>
+        // console.log("랜덤",getrandom(5))
+        let targetX;
+        let targetY;
+        let a=0.1;
+        let img;
+        let count=0; //반딧불의 위치를 언제 바꿀지를 결정짓는 변수
+
+        function init(){
+            img=document.createElement("img");
+            img.src="../../images/bandi/bug.png";
+            img.style.width=40+"px";
+            img.style.position="absolute";
+            img.style.left=100+"px"
+            img.style.top=100+"px"
+
+            let wrapper=document.getElementById("wrapper");
+            wrapper.appendChild(img);
+        }
+        function move(){
+            img.style.left=parseFloat(img.style.left)+a*(targetX-parseFloat(img.style.left))+"px";
+            img.style.top=parseFloat(img.style.top)+a*(targetY-parseFloat(img.style.top))+"px";
+        }
+
+        function setPos(){
+            targetX=getrandom(11)*100;
+            targetY=getrandom(10)*100;
+        }
+
+        //반딧불 움직이기
+        function gameLoop(){
+            count++;
+            if(count%50==0){
+                setPos();
+            }
+            move();
+        }
+
+        window.addEventListener("load",()=>{
+            init();
+            let wrapper=document.getElementById("wrapper");
+            // wrapper.addEventListener("mousemove",(e)=>{
+            //     targetX=e.clientX;
+            //     targetY=e.clientY;
+            // })
+            setInterval(gameLoop,100);
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper"></div>
+</body>
+</html>

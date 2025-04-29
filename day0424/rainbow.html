@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+          height: 600px;
+          width: 600px;
+        }
+
+        #big1{
+          height: 80px;
+          /* display: flex; */
+        }
+        #big1 div:nth-child(1){
+          width: 100px;
+          background-color: aqua;
+          height: 80px;
+          float: left;
+          
+        }
+        #big1 div:nth-child(2){
+            width: 100px;
+            background-color: wheat;
+            height: 80px;
+            float: left;
+        }
+        #big1 div:nth-child(3){
+            width: 100px;
+            height: 80px;
+            background-color: palevioletred;
+            float: left;
+        }
+        #big1 div:nth-child(4){
+            width: 100px;
+            height: 80px;
+            float: left;
+            background-color: pink;
+        }
+        #big1 div:nth-child(5){
+            height: 80px;
+            width: 100px;
+            background-color: palegoldenrod;
+            float: left;
+        }
+        #big1 div:nth-child(6){
+            float: left;
+            width: 100px;
+            height: 80px;
+            background-color: rebeccapurple;
+        }
+        #big2{
+            background-color: red;
+            float: left;
+            height: 500px;
+            width: 600px;
+        }
+        #header div{
+            /* float: left; */
+            width: 100px;
+            height: 80px;
+        }
+    </style>
+    <script>
+        function setColor(color){
+            const set=document.getElementById("big2");
+            console.log(set)
+            set.style.backgroundColor=color;
+        }
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="big1">
+            <div id="raindow1" onclick="setColor('aqua')"></div>
+            <div id="raindow2" onclick="setColor('wheat')"></div>
+            <div id="raindow3" onclick="setColor('palevioletred')"></div>
+            <div id="raindow4" onclick="setColor('pink')"></div>
+            <div id="raindow5" onclick="setColor('palevioletred')"></div>
+            <div id="raindow6" onclick="setColor('rebeccapurple')"></div>
+        </div>
+        <div id="big2"></div>
+    </div>
+</body>
+</html>
