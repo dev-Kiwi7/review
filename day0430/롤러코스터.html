@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*기본적으로 살아있는 마진 값 마저 없애기, 퍼블리싱 분야에서 초기화*/
+        body{margin:0px} 
+        #wrapper{
+            width: 100%;
+            height: 800px;
+        }
+        #content{
+            width: 90%;
+            height: 100%;
+            background-image: url(../images/roller.jpg);
+            background-size: 100% 800px; /*배경이 패턴을 돌지 않도록 강제 크기 조정*/
+            float:left;
+            position: relative;
+        }
+        #aside{
+            width: 10%;
+            height: 100%;
+            background-color: aquamarine;
+            float:left;
+        }
+    </style>
+    <script>
+        let content;
+        let aside;
+        let posArray=new Array(); //자바스크립트는 java언어의 list와 아주 흡사
+        let img;
+        let index=0; //전체 이차원 배열의 어떤 층을 접근할지를 결정
+        let flag=false;
+
+        function createHero(){
+            img=document.createElement("img");
+            img.src="../images/mario.jpg"
+            img.style.width=35+"px";
+            img.style.position="absolute";
+            img.style.left=100+"px";
+            img.style.top=100+"px";
+
+            img.style.transform="scaleX(-1)"; //x축방향 flip
+            
+            content.appendChild(img);
+        }
+
+        //span태그를 생성하여 점으로 표현하고 content 부착
+        function createDot(x,y){
+            let span=document.createElement("span");
+            span.style.background="red";
+            span.style.border="50%";
+            span.style.display="inline-block";
+            span.style.width=3+"px";
+            span.style.height=3+"px";
+            span.style.position="absolute";
+            span.style.left=x+"px";
+            span.style.top=y+"px";
+
+
+            content.appendChild(span);
+
+        }
+
+
+        function insertDot(x,y){
+            //x축과 y축을 담는 조그만 일차원 배열 상자를 생성
+            let pos=[x,y];
+            posArray.push(pos);
+        }
+
+        function printDot(x,y){
+            aside.innerHTML+=x+","+y+"<br>";
+        }
+
+
+
+
+
+
+        //마리오 움직이기
+        function move(){
+            if(flag){
+                if(index>=posArray.length){
+                    index=0;
+                }    
+                img.style.left=posArray[index][0]+"px";
+                img.style.top=posArray[index][1]+"px";
+                // aside.innerHTML+=`${img.style.left} ${img.style.top}<br>`;
+                index++;
+
+            }
+        }
+
+        function init(){
+            content=document.getElementById("content");
+            aside=document.getElementById("aside");
+
+            createHero();//주인공 등장      
+            //content에 이벤트연결
+            content.addEventListener("mousedown",function(){
+                let x=event.clientX;
+                let y=event.clientY;
+                createDot(x,y);//점 만들기
+                insertDot(x,y);//데이터베이스 정보를 쌓자
+                printDot(x,y);//점 찍기
+            })      
+        }
+        addEventListener("load", function(){
+            init();
+            setInterval("move()",100);
+
+            let button=document.querySelector("button").addEventListener('click',()=>{
+                flag=!flag;
+            })
+
+            aside.innerHTML+=posArray
+        });
+    </script>
+</head>
+<body>
+    
+    <div id="wrapper">
+        <!-- <span>나스팬</span>
+        <span>나스팬2</span> -->
+        <div id="content"></div>
+        <div id="aside"></div>
+        <button>시작</button>
+    </div>
+
+</body>
+</html>

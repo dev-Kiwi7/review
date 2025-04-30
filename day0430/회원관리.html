@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 1000px;
+            height: 600px;
+            display: flex;
+            margin: auto;
+        }
+        #aside1{
+            width: 200px;
+            background-color: aqua;
+            text-align: center;
+        }
+        form input{
+            height: 35px;
+            margin: 2px;
+            border: 1px solid #cccccc;
+            border-radius: 3px;
+        }
+        #section{
+            width: 600px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            background-color: blueviolet;
+            
+        }
+        #header{
+            width: 100%;
+            height: 100px;
+            line-height: 100px;
+            
+        }
+        #header input{
+            width: 70%;
+        }
+        #aside2{
+            width: 200px;
+            background-color: aqua;
+            text-align: center;
+
+        }
+        #content{
+            width: 100%;
+            height: 500px;
+            background-color: brown;
+        }
+        table{
+            border-collapse: collapse;
+        }
+    </style>
+    <script>
+        let memberArray=[];
+        let content;//회원 목록이 출력될 영역
+        let currentIndex;//현재 내가 선택한 층
+        
+        //사원 1명에 대한 자세한 정보 가져와서 우측 영역에 출력하자
+        function getDetail(index){
+            currentIndex=index;//현재 내가 몇층을 보고 있는지 다른 함수에서도 알게 하기 위해 전역변수로 빼자
+            form2.empno.value=memberArray[index][0];
+            form2.ename.value=memberArray[index][1];
+            form2.sal.value=memberArray[index][2];
+            form2.comm.value=memberArray[index][3];
+        }
+
+        //사원 한 명 삭제
+        function del(){
+            memberArray.splice(currentIndex,1);
+            printTable();
+        }
+
+        //동적으로 테이블을 출력하자
+        function printTable(){
+            let tag="<table border='1px' width='100%'>";
+            tag+="<tr>";
+            tag+="<td>No</td>";
+            tag+="<td>EMPNO</td>";
+            tag+="<td>ENAME</td>";
+            tag+="<td>SAL</td>";
+            tag+="<td>COMM</td>";
+            tag+="</tr>";
+            
+            //실제 데이터가 출력된 tr 영역
+            for(let i=0;i<memberArray.length;i++){
+                // tag+="<tr>";
+                tag+="<tr align='center' onClick=\"getDetail("+i+")\"   onMouseOver=\"this.style.background='pink'\" onMouseOut=\"this.style.background=''\">";
+                tag+="<td>1</td>";
+                tag+=`<td>${memberArray[i][0]}</td>`;
+                tag+=`<td>${memberArray[i][1]}</td>`;
+                tag+=`<td>${memberArray[i][2]}</td>`;
+                tag+=`<td>${memberArray[i][3]}</td>`;
+                tag+="</tr>";
+            }
+                
+            //통계출력(td를 5개를 통합)
+            tag=tag+"<tr>";
+            tag=tag+"<td colspan='5' align='right'>"+memberArray.length+"</td>";
+            tag=tag+"</tr>";
+            tag+="<table>";
+            content.innerHTML=tag;
+
+        }
+        
+        //메모리상의 데이터베이스에 사원한명 등록하기
+        function regist(){
+            //사원 한 명은 하나의 일차원 배열에 담을 수 있으므로, 일차원 배열 생성하자
+            let member=new Array();
+            member.push(form1.empno.value);
+            member.push(form1.ename.value);
+            member.push(form1.sal.value);
+            member.push(form1.comm.value);
+
+            //방금 생성된 사원 1명의 정보를 담는 member배열을 memberArray배열에 추가하자
+            memberArray.push(member);
+
+            //등록 초기화(기존 입력했던 데이터를 다시 지운다)
+            form1.reset();
+        }
+        function init(){
+            content=document.getElementById("content");
+        }
+        addEventListener('load',function(){
+            init();
+            printTable();
+            //문서 로드시, 커서를 좌측입력 최상단에 올려놓아주는 배려
+            form1.empno.focus(); //커서 올려놓기
+
+            //등록 버튼에 클릭이벤트 등록
+            let bt_regist=document.querySelector("#aside1 input[type='button']");
+            bt_regist.addEventListener("click",function(){
+                regist();//회원등록
+                printTable(); //회원출력
+            });
+            form2.bt_del.addEventListener("click",()=>{
+                del();
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="aside1">
+            <form  name="form1">
+                <input type="text" name="empno" placeholder="사원번호 입력">
+                <input type="text" name="ename" placeholder="사원명 입력">
+                <input type="text" name="sal" placeholder="급여 입력">
+                <input type="text" name="comm" placeholder="커미션 입력">
+                <input type="button" value="사원등록">
+            </form>
+        </div>
+        <div id="section">
+            <div id="header">
+                <!-- <input type="text" placeholder="검색어를 입력하세요"> -->
+            </div>
+            <div id="content">
+
+            </div>
+        </div>
+        <div id="aside2">
+            <form name="form2">
+                <input type="text" name="empno" placeholder="사원번호 입력">
+                <input type="text" name="ename" placeholder="사원명 입력">
+                <input type="text" name="sal" placeholder="급여 입력">
+                <input type="text" name="comm" placeholder="커미션 입력">
+                <input type="button" name="bt_edit" value="사원등록">
+                <input type="button" name="bt_del" value="사원삭제">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

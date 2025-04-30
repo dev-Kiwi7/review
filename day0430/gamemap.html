@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #stage{
+            width: 1200px;
+            height: 800px;
+            background-image: url(../images/gamemap/BG.png);
+            background-size: 1200px 800px;
+            margin: auto;
+            position: relative;
+        }
+        
+    </style>
+    <title>Document</title>
+    <script>
+        let stage;  
+        const tree=1; // 나무 1
+        const block=2; //벽돌 2
+        const box=3; // 박스 3
+        //stage에 올려질 물체의 좌표를 결정한 표 선언
+        // 1200(50씩) 800 (50씩)
+        
+        let map=[
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,3,3,3,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        ];
+        
+        //게임에 등장할 객체들을 화면에 생성
+        function createObject(){
+           
+
+            for(let i=0;i<map.length;i++){
+                for(let j=0;j<map[i].length;j++){
+                    if(map[i][j]!=0){
+                        let img=document.createElement("img");
+                        img.style.width=50+"px";
+                        img.style.height=50+"px";
+                        img.style.position="absolute";
+                        img.style.top=(i*50)+"px";
+                        img.style.left=(j*50)+"px";
+                        stage.appendChild(img);
+                        switch(map[i][j]){
+                            case 1:
+                                img.src="../images/gamemap/Objects/Tree.png";
+                                break;
+                            case 2:
+                                img.src="../images/gamemap/Objects/Stone.png";
+                                break;
+                            case 3:
+                                img.src="../images/gamemap/Objects/Bush (1).png";
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+        function init(){
+            stage=document.getElementById("stage");
+            createObject();
+        }
+        addEventListener('load',function(){
+            init();
+        });
+    </script>
+</head>
+<body>
+    <div id="stage"></div>
+</body>
+</html>

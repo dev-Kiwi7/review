@@ -67,16 +67,22 @@
         let img;
         let flag=false;
         let a=0.1;
-        let targetIndex;
-        // let i;s
+        let n=0;
 
         function gameLoop(){
-            // let n=getRandom(6);
-            // if(flag){
-            //     move(n);
-            // }
-            let targetX = targetIndex * -500;
-            box.style.left=parseFloat(box.style.left)+a*(targetX-parseFloat(box.style.left))+"px";
+            if(flag){
+                if(n>=6){
+                    n=0;
+                }else{
+                    n++;
+                }
+                move();
+
+            }else{
+
+                move();
+            }
+          
         }
 
         //슈렉의 이미지 7개를 생성하고 7개 이미지를 담게된 바깥쪽 부모인 box를 생성하여 mask의 자식요소로 부착하자
@@ -102,9 +108,10 @@
         }
 
         //사용자가 선택한 번째의 슈렉이미지 box의 값을 위치시키기
-        function move(i){
-            // box.style.left=parseFloat(box.style.left)+a*((i*-500)-parseFloat(box.style.left))+"px";
-            targetIndex=i;
+        function move(){
+            // box.style.left=parseFloat(box.style.left)+a*((n*-500)-parseFloat(box.style.left))+"px";
+            box.style.left=n*-500+"px";
+
         }
 
         //일반인들 콘솔 제어가 불가능하므로 UI이미지를 제어
@@ -118,9 +125,8 @@
                 dot.style.left=fleft+"px";
                 footer.appendChild(dot);
                 fleft+=50;
-
                 dot.addEventListener('mouseover',()=>{
-                    move(i);
+                    n=i;
 
                 })
             }
@@ -135,7 +141,7 @@
                 flag=!flag;
             })
 
-            setInterval(gameLoop,60);
+            setInterval("gameLoop()",100);
             // setInterval(function(){move(i)},100);
         })
     </script>
