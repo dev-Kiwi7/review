@@ -69,11 +69,22 @@
             form2.comm.value=memberArray[index][3];
         }
 
+        //선택한 층에 사는 사원의 정보를 변경하여 테이블 갱신까지 처리
+        function edit(){
+            //현재 이차원 배열인 memberArray의 수정하고 싶은 사원을 접근해보자
+            memberArray[currentIndex][0]=form2.empno.value; //사원번호 반영
+            memberArray[currentIndex][1]=form2.ename.value; //사원번호 반영
+            memberArray[currentIndex][2]=form2.sal.value; //사원번호 반영
+            memberArray[currentIndex][3]=form2.comm.value; //사원번호 반영
+
+            printTable();
+        };
+
         //사원 한 명 삭제
         function del(){
             memberArray.splice(currentIndex,1);
             printTable();
-        }
+        };
 
         //동적으로 테이블을 출력하자
         function printTable(){
@@ -137,8 +148,23 @@
                 regist();//회원등록
                 printTable(); //회원출력
             });
+
+            form2.bt_edit.addEventListener("click",()=>{
+                if(confirm("정보를 수정하실래요?")){
+                    edit();
+                }
+            })
+
+
             form2.bt_del.addEventListener("click",()=>{
-                del();
+                if(confirm("너 진짜 원해")){
+                    if(currentIndex==undefined){ //사원을 선택한 적이 없는 경우
+                        alert("먼저 삭제하실 사원을 선택하세요");
+                    }else{
+                        del();
+                    }
+                }
+                
             })
         })
     </script>
@@ -156,7 +182,15 @@
         </div>
         <div id="section">
             <div id="header">
-                <!-- <input type="text" placeholder="검색어를 입력하세요"> -->
+                <form action="">
+                    <select name="" id="">
+                        <option value="">empno</option>
+                        <option value="">ename</option>
+                        <option value="">sal</option>
+                        <option value="">comm</option>
+                    </select>
+                    <input type="text" placeholder="검색어를 입력하세요">
+                </form>
             </div>
             <div id="content">
 
@@ -168,7 +202,7 @@
                 <input type="text" name="ename" placeholder="사원명 입력">
                 <input type="text" name="sal" placeholder="급여 입력">
                 <input type="text" name="comm" placeholder="커미션 입력">
-                <input type="button" name="bt_edit" value="사원등록">
+                <input type="button" name="bt_edit" value="사원수정">
                 <input type="button" name="bt_del" value="사원삭제">
             </form>
         </div>
