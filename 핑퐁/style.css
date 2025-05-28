@@ -1,0 +1,45 @@
+#stage {
+  display: flex;
+  flex-direction: row;
+  width: 309px;
+  margin: auto;
+  margin-top: 100px;
+}
+
+#tetris {
+  width:300px;
+  height:600px;
+  background: antiquewhite;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  background-color: #333;
+}
+
+.filled {
+  background-color: cyan;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100px;
+  margin-left: 10px;
+
+}
+
+#score{
+  width: 100px;
+}
+
+.sidebar input{
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+  border: 0px;
+  background-color:tan;
+  font-weight: bold;
+}

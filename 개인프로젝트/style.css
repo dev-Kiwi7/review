@@ -1,0 +1,15 @@
+#stage{
+    border-top:5px solid #ddd ;
+    border-left:5px solid #ddd ;
+    width: 600px;
+    height: 400px;
+    background-color: lightgray;
+    margin: auto;
+    position: relative;
+    display: grid;
+    background:
+		linear-gradient(to bottom, transparent 45px , #ddd 5px)0 0 / 100vw 50px repeat-y,
+		linear-gradient(to right, transparent 45px, #ddd 5px) 0 0 / 50px 100vh repeat-x
+	    white;
+
+}

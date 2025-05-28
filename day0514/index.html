@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{margin: 0px;}
+        #stage{
+            width: 1600px;
+            height: 576px;
+            background-image: url(../images/play/bg.jpg);
+            background-size: 1500px 576px;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #score{
+            position:absolute;
+            left: 30px;
+            top: 10px;
+            color: yellow;
+            font-weight: bold;
+            font-size: 27px;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+        }
+    </style>
+    <script src="GameObject.js"></script>
+    <script src="Hero.js"></script>
+    <script src="Enemy.js"></script>
+    <script src="Bullet.js"></script>
+    <script src="../lib/common.js"></script>
+    <script>
+        let bgX=0;
+        let st;
+        let hero;
+        let bulletArray=[];//총알을 담게될 배열 
+        let enemyArray=[]; //적군을 담게될 배열 
+        let total=0; //점수
+
+
+        //필요한 시점에 이 함수를 호출하면, 점수 계산
+        function setScore(n){
+            total+=n;
+            document.getElementById("score").innerText=total;
+        }
+
+        function bgEffect(){
+            let stage=document.getElementById("stage");
+            stage.style.backgroundPosition=`${bgX--}px 0px`;
+        }
+  
+        
+        function gameLoop(){
+            bgEffect();
+            
+            //끊임없는 주인공의 tick(),render()
+            hero.tick();
+            hero.render();
+            
+            //화면에 등장하는 모든 총알을 대상으로 tick(),render()
+            //총알 배열에 담기
+            for(let i=0;i<bulletArray.length;i++){
+                bulletArray[i].tick();
+                bulletArray[i].render();
+            }
+
+            for(let i=0;i<enemyArray.length;i++){
+                enemyArray[i].tick();
+                enemyArray[i].render();
+            }
+        }
+        function setLoop(){
+            //아무런 루프가 없을때만 새로운 루프를 시작
+            if(st==undefined){
+                st = setInterval(gameLoop,10);
+            }else{
+                clearInterval(st);
+                st=undefined;
+            }
+        }
+        function handleMove(e){
+            switch(e.keyCode){
+                case 37:hero.velX=-3;break; //좌측
+                case 38:hero.velY=-3 ;break; //우측
+                case 39:hero.velX=3 ;break; //위로
+                case 40:hero.velY=3 ;break; //아래로
+                case 32:fire() ;break; //총알
+                case 27:setLoop() ;break; //pause(esc)
+            }
+        }
+        function handleStop(e){
+            switch(e.keyCode){
+                case 37:hero.velX=0;break; //좌측
+                case 38:hero.velY=0 ;break; //우측
+                case 39:hero.velX=0 ;break; //위로
+                case 40:hero.velY=0 ;break; //아래로
+            }
+        }
+        function createHero(){
+            hero=new Hero(document.getElementById("stage"),"../images/play/plane.png",100,200,55,50,0,0);
+        }
+        //총알발사
+        function fire(){
+            let bullet=new Bullet(document.getElementById("stage"),"../images/play/game/ball.png",hero.x,hero.y,25,20,7,0);
+            bulletArray.push(bullet);
+            console.log(hero.x,hero.y);
+            
+        }
+        function createEnemy(){
+            //적군은 여러마리 
+            let r=getRandom(4);
+            let n=getRandom(540);
+            enemy=new Enemy(document.getElementById("stage"),"../images/play/game/e"+(r+1)+".png",1400,n,55,50,-2,0);
+            enemyArray.push(enemy);
+            setTimeout(createEnemy,1000);
+            
+        }
+        function init(){
+            createHero();//주인공등장 
+            createEnemy();//적군등장 
+            //키보드 이벤트 구현
+            addEventListener("keydown",function(e){
+                handleMove(e);
+            });
+            addEventListener("keyup",function(e){
+                handleStop(e);
+            });
+            setScore(0);
+        }
+        addEventListener("load",function(){
+            init();
+        })
+    </script>
+</head>
+<body>
+    <div id="stage">
+        <div id="score"></div>
+    </div>
+</body>
+</html>

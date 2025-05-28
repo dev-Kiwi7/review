@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <style>
+        body{margin: 0px;}
+        #header{
+            height: 40px;
+            line-height: 40px;
+            background-color: yellow;
+        }
+        #header input[type="file"]{
+            width: 70px;
+        }
+        #content{
+            height: 400px;
+            background-color: aquamarine;
+        }
+        #footer{
+            height: 50px;
+            background-color:antiquewhite;
+            line-height: 50px;
+
+        }
+    </style>
+    <script>
+        let obj;
+
+        function loadData(e){
+            console.log(e);
+
+            let file=e.target.files[0];
+
+            //파일 읽기
+            let reader=new FileReader();
+            console.log("A");
+            reader.onload=function(data){
+                console.log("B");
+                console.log(data);
+                // data.target.result => json문자열 (객체가 아니기 때문에 파싱해야됨)
+                obj=JSON.parse(data.target.result); //쌍따옴표 등을 제거한 후 JS객체 반환
+                console.log("파싱결과는",obj)
+
+                printTable(obj);
+            }
+            reader.readAsText(file);
+            console.log("C");
+        }
+        //등록 시 누적된 맛집들의 리스트를 테이블로 동적 출력
+        function printTable(obj){
+            let tag="<table width='100%' border='1px'>";
+            tag+="<tr>";
+            tag+="<td>No</td>";
+            tag+="<td>상호명</td>";
+            tag+="<td>연락처</td>";
+            tag+="<td>위도경도</td>";
+            tag+="<td>대표사진</td>";
+            tag+="</tr>";
+            
+            let storeList=obj.storeList;
+            let n=obj.storeList.length;
+
+            for(let i=0;i<n;i++){
+                tag+="<tr>";
+                tag+=`<td>${i+1}</td>`;
+                tag+=`<td>${storeList[i].store_name}</td>`;
+                tag+=`<td>${storeList[i].tel}</td>`;
+                tag+=`<td>${storeList[i].pos}</td>`;
+                // tag+=`<td>${list[i].profile}</td>`;
+                tag+="</tr>";
+                
+            }
+            tag+="</table>"
+            document.getElementById("content").innerHTML=tag;
+        }
+
+        //지도를 보유한 부모창에, 현재 내가 보유한 리스트를 이용하여 마커 출력
+        function showIcons(){
+            window.opener.registAll(obj);
+            window.close(); //나의 윈도우 자동 닫기 
+        }
+        addEventListener("load",function(){
+            document.querySelector("#header input[type='file']").addEventListener('change',function(e){
+                loadData(e);
+            })
+            document.querySelector("#footer button").addEventListener('click',function(){
+                showIcons();
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="header">
+        <input type="file">
+    </div>
+    <div id="content"></div>
+    <div id="footer">
+        <button>지도에 적용</button>
+    </div>
+    
+
+    
+</body>
+</html>

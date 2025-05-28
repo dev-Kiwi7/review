@@ -1,0 +1,40 @@
+{
+    "storeList":[
+        {
+            "store_name":"김밥천국",
+            "tel": "02-335-888",
+            "pos": "37.50937, 127.0562",
+            "iconImg":"../images/play/plane.png"
+        },
+        {
+            "store_name":"코엑스",
+            "tel": "02-335-888",
+            "pos": "37.52937, 127.0862",
+            "iconImg":"../images/play/plane.png"
+        },
+        {
+            "store_name":"한강",
+            "tel": "02-335-888",
+            "pos": "37.50937, 127.0162",
+            "iconImg":"../images/play/plane.png"
+        },
+        {
+            "store_name":"북한산",
+            "tel": "02-335-888",
+            "pos": "37.51937, 127.0562",
+            "iconImg":"../images/play/plane.png"
+        },
+        {
+            "store_name":"남한산성",
+            "tel": "02-335-888",
+            "pos": "37.52937, 127.0362",
+            "iconImg":"../images/play/plane.png"
+        },
+        {
+            "store_name":"모모베이글",
+            "tel": "02-335-888",
+            "pos": "37.55937, 127.0162",
+            "iconImg":"../images/play/plane.png"
+        }
+    ]
+}
