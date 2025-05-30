@@ -18,9 +18,14 @@ const colors = [
     'rgba(0,255,0,0.7)',      // green
     'rgba(128,0,128,0.7)',    // purple
     'rgba(255,0,0,0.7)',      // red
-    'rgba(200,200,200,0.5)',  // gray (투명도 높게)
-
+    'rgba(200,200,200,0.5)',  // gray
+    'rgba(255,0,0,0.7)'      // red
+    
 ];
+
+const BOMB_INDEX = 8;
+const bombImg = new Image();
+bombImg.src = './cookie.png';
 
 //블록 정의 
 const tetrisblock = [
@@ -56,6 +61,10 @@ const tetrisblock = [
         [0, 1, 0],     
         [0, 1, 0],     
         [0, 1, 0],     
+    ],
+    [
+        [1, 1],
+        [1, 1],        
     ]
     
 ];
@@ -86,9 +95,19 @@ function drawTetrisBlock(shape,x,y,color){
     context.fillStyle=color
     shape.forEach((row,rowIndex)=>{
         row.forEach((cell,colIndex)=>{
-            if(cell){
-                context.fillRect((colIndex+x)*grid,(rowIndex+y)*grid,grid,grid);
-            
+            if (cell) {
+                const drawX = (colIndex + x) * grid;
+                const drawY = (rowIndex + y) * grid;
+
+                // 폭탄 블럭이면 이미지로 그리기
+                if (currentBlockIndex === BOMB_INDEX) {
+                    context.drawImage(bombImg, drawX, drawY, grid, grid);
+                } else {
+                    // 일반 블럭은 색상으로 그리기
+                    context.fillStyle = color;
+                    context.fillRect(drawX, drawY, grid, grid);
+                  
+                }
             }
         })
     })
@@ -155,35 +174,52 @@ function isCollision(shape, x, y) {
         if (newY >= 0 && field[newY][newX]) {
           return true;
         }
+
+        
       }
     }
   }
   return false;
 }
 
+
 function move() {
-  // 1칸 내리기 전에 충돌 체크
   if (!isCollision(currentShape, x, y + 1)) {
     y += 1;
   } else {
-    // 충돌 시 고정
-    currentShape.forEach((row, i) => {
-      row.forEach((cell, j) => {
-        if (cell) {
-          const fy = y + i;
-          const fx = x + j;
-          if (fy >= 0 && fy < rows && fx >= 0 && fx < cols) {
-            field[fy][fx] = currentColor;
+    if (currentBlockIndex === BOMB_INDEX) {
+      currentShape.forEach((row, i) => {
+        row.forEach((cell, j) => {
+          if (cell) {
+            const centerY = y + i;
+            const centerX = x + j;
+            for (let dy = -1; dy <= 1; dy++) {
+              for (let dx = -1; dx <= 1; dx++) {
+                const fy = centerY + dy;
+                const fx = centerX + dx;
+                if (fy >= 0 && fy < rows && fx >= 0 && fx < cols) {
+                  field[fy][fx] = 0;
+                }
+              }
+            }
           }
-        }
+        });
       });
-    });
-    
-
-    // 줄 삭제
+    } else {
+      currentShape.forEach((row, i) => {
+        row.forEach((cell, j) => {
+          if (cell) {
+            const fy = y + i;
+            const fx = x + j;
+            if (fy >= 0 && fy < rows && fx >= 0 && fx < cols) {
+              field[fy][fx] = currentColor;
+            }
+          }
+        });
+      });
+    }
     clearLine();
 
-    // 새 블록 준비
     x = Math.floor(Math.random() * (cols - 4));
     y = 0;
     currentBlockIndex = Math.floor(Math.random() * tetrisblock.length);
@@ -191,9 +227,10 @@ function move() {
     currentShape = tetrisblock[currentBlockIndex];
     currentColor = colors[currentColorIndex];
   }
-
   render();
 }
+
+
 
 function rotate(shape) {
   const rows = shape.length;
@@ -243,15 +280,25 @@ addEventListener("keydown",(e)=>{
 
 
 function startGame() {
-   // score = 0;
-    //scoreDisplay.textContent = 'Score: 0';
+
     
     setInterval(move,1000);
 }
 
-// document.addEventListener('keydown', control);
 addEventListener("load",()=>{
     drawGrid();
     drawTetrisBlock(currentShape, x, y, currentColor); // (9, 0) 위치에 그림
      
 })
+
+function Bomb() {
+  currentBlockIndex = BOMB_INDEX;
+  currentShape = tetrisblock[BOMB_INDEX];
+  currentColor = colors[BOMB_INDEX];
+  
+  // 떨어뜨릴 위치 초기화
+  x = Math.floor(Math.random() * (cols - 1)); // 폭탄은 1칸짜리니까
+  y = 0;
+
+  render(); 
+}

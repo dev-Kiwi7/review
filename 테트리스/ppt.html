@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+
+    </script>
+</head>
+<body>
+    <div id="stage">
+        <a href="ppt.html">설명서</a>
+        <a href="index.html">테트리스</a>
+    </div>
+        <div id="product">
+            <h2>*️⃣프로젝트명</h2>
+            <h4>테트리스 게임</h4> 
+            <h2>🚩목표</h2>
+            <h4>키보드이벤트로 도형 회전하기</h4> 
+            <h4>도형 쌓기</h4> 
+            <h4>한줄 채우면 삭제하기 </h4> 
+            <h4>폭탄으로 삭제하기 </h4> 
+            <h2>🐱‍🏍개발환경: VS Code</h2>
+            <h2>🐱적용기술 및 설명</h2>
+            <h4>
+                Canvas 이용한 도형 그리기<br>
+                <br>
+                1. 그리드와 블럭<br>
+                캔버스 요소 위에 30px 간격의 그리드를 그려 테트리스 보드를 구성했습니다.<br>
+                각 블럭은 2차원 배열로 구성되어 있고, drawTetrisBlock() 함수를 통해 실제 캔버스에 색상 또는 이미지로 렌더링됩니다.<br>
+                <br>
+                블럭 : fillRect(x, y, width, height)  <br>
+                context.fillStyle=color 색칠된 직사각형을 그리기<br>
+                
+                
+                <br>
+                2. 블럭 랜덤 생성 및 조작<br>
+                화살표 키로 블럭을 좌우 이동, 아래로  내리기, 위로 회전이 가능합니다.<br>
+                새 블럭은 move() 함수에서 바닥 또는 다른 블럭과 충돌할 때마다 새로 생성됩니다.<br>
+                
+                move(): 충돌 검사 → 고정 또는 제거 → 새 블럭 생성<br>
+                
+                rotate(): 배열 전치 → 회전<br>
+                
+                <br>
+                3. 폭탄<br>
+                폭탄 블럭은 이미지로 표현되고, 블럭에 닿으면 3x3 범위의 블럭을 모두 제거합니다.<br>
+                기존 블럭과의 차별화를 위해 BOMB_INDEX를 따로 설정하고, move() 함수에서 특수 동작을 처리합니다.<br>
+
+    
+                <br><br><br><br><br><br><br><br><br>
+            </h4>
+        </div>
+</body>
+</html>

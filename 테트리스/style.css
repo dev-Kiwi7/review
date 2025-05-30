@@ -1,9 +1,14 @@
 #stage {
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   width: 309px;
   margin: auto;
-  margin-top: 100px;
+
+ 
+}
+#game{
+   display: flex;
+   flex-direction: row;
 }
 
 #tetris {
@@ -42,4 +47,25 @@
   border: 0px;
   background-color:tan;
   font-weight: bold;
+}
+
+a{
+  display: inline-block;
+  margin-bottom: 50px;
+  margin-right: 30px;
+  text-decoration: none;
+}
+
+#product{
+  width: 800px;
+  margin: auto;
+
+}
+
+h2{
+  margin-bottom: 30px;
+}
+
+h4{
+  margin-left: 40px;
 }
